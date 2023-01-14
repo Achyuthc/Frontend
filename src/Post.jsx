@@ -6,7 +6,7 @@ import { supabase } from './client'
 
 function Post() {
     const [posts,setPosts]=useState([]);
-    const [post,setPost]=useState({userId:12,title:"",text:"",createdAt:Date,tags:[],images:[], updatedAt:Date})
+    const [post,setPost]=useState({id:null,created_at:""});
 
     const {userId,title,text,createdAt,tags,images,updatedAt} =post;
     const {tag,setTag}=useState("");
@@ -14,21 +14,23 @@ function Post() {
 
     useEffect(()=>{
         fetchPosts();
+        console.log("fected")
     },[])
 
 
 
     async function fetchPosts() {
         const {data} =await supabase
-            .from('posts')
-            .select();
+        .from('posts')
+        .select('*');
+        
         setPosts(data);
         console.log("hi")
         console.log(data);
     }
     async function createPost() {
         await supabase
-        .from('posts')
+        .from("posts")
         .insert(post)
         .single();
         setPost({userId:1,title:"",text:"",createdAt:"",tags:[],images:[], updatedAt:""})

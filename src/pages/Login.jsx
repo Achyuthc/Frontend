@@ -21,6 +21,7 @@ function Login() {
         <div className='log'>
         <Auth supabaseClient = {supabase} appearance ={{theme : ThemeSupa}} theme = "white" providers={["google"]}/>
         </div>
+        
     
     </header>
     </div>
